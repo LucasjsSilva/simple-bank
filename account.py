@@ -14,11 +14,12 @@ class Account:
             raise ValueError("Cannot deposit negative amount or zero")
         self.balance += amount
     
-    def transfer(self, amount, destiny):
+    def transfer(self, amount, destiny):        
         if amount <= 0:
             raise ValueError("Cannot transfer negative amount or zero")        
         if amount > self.balance:
-            raise ValueError("Insufficient funds")
+            raise ValueError("Insufficient funds")        
+        if not isinstance(destiny, Account):
+            raise ValueError("Invalid destination account")
         self.balance -= amount
         destiny.balance += amount
-        

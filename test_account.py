@@ -5,7 +5,7 @@ class TestAccount(unittest.TestCase):
     def setUp(self):
         self.account1 = Account(initial_balance=100)
         self.account2 = Account(initial_balance=100)
-
+        self.account3 = None
     def test_withdraw_success(self):
         self.account1.withdraw(50)
         self.assertEqual(self.account1.balance, 50)
@@ -45,6 +45,9 @@ class TestAccount(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.account1.transfer(150, self.account2)
 
+    def test_transfer_invalid_destination_account(self):
+        with self.assertRaises(ValueError):
+            self.account1.transfer(50, self.account3)
 
 if __name__ == '__main__':
     unittest.main()
